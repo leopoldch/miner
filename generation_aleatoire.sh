@@ -21,20 +21,34 @@ randomGenerate() {
 
 numbersDetection() {
 	local cpt_bombe=0
-	for i in $grid
+	local cpt=0
+	local fin=$((taille_grille*taille_grille-1))
+	for i in $(seq 0 $fin)
 	do
-		if [ i -eq 0 ]
-		then	
-			#APPEL FONCTION JUL, RETURN LISTE VOISIN (voisin = 4 5 6 9 11 15 16 17)
-			for j in $voisin
+			
+		source find_cell.sh
+		voisin=$(find_neig $i)
+		echo "voisin  " ${voisin[*]}
+		echo
+		
+		if [ ${grid[i]} -eq 0 ]
+		then
+			for j in ${voisin[*]}
 			do
-				if [ ${grid[j]} -eq -1 ]
+				if [ $j -le $fin ]
 				then
-					cpt_bombe=$(("$cpt_bombe"+1))
+					echo "test avec $j, voisin de $i" ${grid[j]}
+					if [ ${grid[j]} -eq -1 ]
+					then
+						cpt_bombe=$(("$cpt_bombe"+1))
+					fi
 				fi
 			done
-			grid[i]="$cpt_bombe"
+			echo "nb bombe  "  "$cpt_bombe"
+			echo "avant" ${grid[cpt]}
+			grid[cpt]="$cpt_bombe"
 		fi
+		cpt=$(("$cpt"+1))
 		cpt_bombe=0
 	done
 		
@@ -49,15 +63,15 @@ then
 	taux_bombes=$(echo difficulty | cut -d" " -f2)
 	taille_grille=$(echo difficulty | cut -d" " -f1)
 else
-	taux_bombes=20 # En pourcentage
+	taux_bombes=80 # En pourcentage
 	taille_grille=5 # Taille n*n de la grille
 fi
 
-randomGenerate "$taux_bombes" "$taille_grille"
-numberDetection
-source affichage_grille.sh
-affichageGrille 5 
+#randomGenerate "$taux_bombes" "$taille_grille"
+grid=(0 -1 0 -1 0 -1 -1 0 0 -1 0 -1 0 0 0 -1 0 -1 0 -1 0 -1 0 0 0)
+echo "grid avec bombe   " ${grid[*]}
+numbersDetection
 
 
-echo ${grid[*]}
+echo "grid resolut   " ${grid[*]}
 
