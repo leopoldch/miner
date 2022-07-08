@@ -33,13 +33,31 @@ function difficulte(){
 	echo '2 - Intermédiaire'
 	echo '3 - Expert'
 	read -p 'Veuillez choisir votre difficulté ' input
-#	if [ $input -eq '1' ]
-#	if [ $input -eq '2' ]
-#	if [ $input -eq '3' ]
+	if [ "$input" -eq '1' ]
+	then
+		taille=8
+		bombe=20
+	elif [ "$input" -eq '2' ]
+	then
+		taille=15
+		bombe=30
+	elif [ "$input" -eq '3' ]
+	then
+		taille=25
+		bombe=40
 }
 
 function retry(){
 	echo 'recommencer'
 }
 
+
+sendDifficulty(){
+	if 
+	echo "$taille" "$bombe"
+}
+taille=8
+bombe=20
+
 choisir_menu
+
