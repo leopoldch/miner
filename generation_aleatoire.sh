@@ -18,7 +18,9 @@ randomGenerate() {
 			grid["$i"]=0
 		fi
 	done
-
+	#echo ${grid[*]}
+	#grid=(0 0 0 0 0 -1 0 -1 0)
+	#echo ${grid[*]}
 }
 
 
@@ -100,33 +102,33 @@ affichageGriller() {
 
 
 
-if [ -e demmarrage.sh ]
-then
-	source demarrage.sh
-	difficulty=$(sendDifficulty)
-	taux_bombes=$(echo difficulty | cut -d" " -f2)
-	taille_grille=$(echo difficulty | cut -d" " -f1)
-else
-	taux_bombes=50 # En pourcentage
-	taille_grille=5 # Taille n*n de la grille
-fi
+#if [ -e demmarrage.sh ]
+#then
+#	source demarrage.sh
+#	difficulty=$(sendDifficulty)
+#	taux_bombes=$(echo difficulty | cut -d" " -f2)
+#	taille_grille=$(echo difficulty | cut -d" " -f1)
+#else
+#	taux_bombes=50 # En pourcentage
+#	taille_grille=5 # Taille n*n de la grille
+#fi
 
 
-randomGenerate "$taux_bombes" "$taille_grille"
+#randomGenerate "$taux_bombes" "$taille_grille"
 #echo ${grid[*]}
 #grid=(0 0 -1 -1 0 0 0 0 0)
 
-echo "grid avec bombe" 
-echo
-affichageGrille $taille_grille 
-echo
+#echo "grid avec bombe" 
+#echo
+#affichageGrille $taille_grille 
+#echo
 
-numbersDetection 
+#numbersDetection 
 
 
-echo "grid resolut" 
-echo
-affichageGriller $taille_grille 
+#echo "grid resolut" 
+#echo
+#affichageGriller $taille_grille 
 
-echo "$nb_mines"
+#echo "$nb_mines"
 
