@@ -5,6 +5,7 @@ randomGenerate() {
 	local ratio=$(("$ratio"/10))
 	set -a grid
 	local m=$(("$n"*"$n"-1))
+	nb_mines=0
 	
 	for i in $(seq 0 "$m")
 	do
@@ -12,13 +13,12 @@ randomGenerate() {
 		if [ "$alea" -eq "$ratio" ]
 		then
 			grid["$i"]=-1
+			nb_mines=$(($nb_mines+1))
 		else
 			grid["$i"]=0
 		fi
 	done
-	#echo ${grid[*]}
-	#grid=(0 0 0 0 0 -1 0 -1 0)
-	#echo ${grid[*]}
+
 }
 
 
@@ -127,4 +127,6 @@ numbersDetection
 echo "grid resolut" 
 echo
 affichageGriller $taille_grille 
+
+echo "$nb_mines"
 
