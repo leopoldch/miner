@@ -1,5 +1,8 @@
 #!/bin/bash
 
+
+
+
 emplacement=0
 #On fait commencer le joueur à la case 1, donc indice 0.
 # Il faut absolument donner un argument à la fonction getkey, il faut lui passer l'emplacement actul et elle retournera l emplacement de sortie
@@ -109,7 +112,8 @@ getkey() {
 		elif [ "$input" == "a" ]; then
 			echo "poser un flag"
 
-		 	#action pour poser le flag 
+		 	source jalons.sh
+		 	jalon $position
 
 			echo "$position"
 			exit
