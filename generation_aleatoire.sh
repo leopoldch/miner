@@ -42,8 +42,16 @@ numbersDetection() {
 
 }
 
-taux_bombes=20 # En pourcentage
-taille_grille=5 # Taille n*n de la grille
+if [ -e demmarrage.sh ]
+then
+	source demarrage.sh
+	difficulty=$(sendDifficulty)
+	taux_bombes=$(echo difficulty | cut -d" " -f2)
+	taille_grille=$(echo difficulty | cut -d" " -f1)
+else
+	taux_bombes=20 # En pourcentage
+	taille_grille=5 # Taille n*n de la grille
+fi
 
 randomGenerate "$taux_bombes" "$taille_grille"
 numberDetection
