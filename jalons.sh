@@ -14,7 +14,7 @@ jalon() {
 	
 	#Tableau affichage / nom à modifier pour agir sur une variable globale
 	
-	grid_af[$positionjal]="¤"
+	grid_af[$positionjal]=">"
 	
 }
 

@@ -1,7 +1,15 @@
 #!/bin/bash
 
+source demarrage.sh
+
+
 function main () {
-	return 0
+	
+	#Appel de la fonction démarrage 
+	choisir_menu
+	
+		
+	
 }
 
-main
+
