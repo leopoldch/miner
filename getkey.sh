@@ -1,6 +1,7 @@
 #!/bin/bash
 
 emplacement=0
+taillemat=8
 #On fait commencer le joueur à la case 1, donc indice 0.
 # Il faut absolument donner un argument à la fonction getkey, il faut lui passer l'emplacement actul et elle retournera l emplacement de sortie
 
@@ -29,7 +30,6 @@ getkey() {
 	
 
 	# Si on veut une taille différente il va falloir mettre à jour le code pour renseigner taillemat
-	taillemat=8
 
 	declare -A array1
 	declare -A array2
@@ -39,9 +39,9 @@ getkey() {
 	for i in $(seq 0 $(($taillemat-1)))
 	do
 		array1[$i]=$i
-		array2[$i]=$((8*$i))
-		array4[$i]=$((56+$i))
-		array3[$i]=$((7+$((8*$i))))
+		array2[$i]=$(($taillemat*$i))
+		array4[$i]=$(($(($taillemat*$(($taillemat-1))))+$i))
+		array3[$i]=$(($(($taillemat-1))+$(($taillemat*$i))))
 	done
 	
 	echo ${array1[*]}
@@ -58,7 +58,6 @@ getkey() {
 		read -n1 -s input
 
 		if [ "$input" ==  "z" ]; then
-			echo "en haut"
 
 			#Faire action aller en haut si possible (si on est pas déjà sur la premiere ligne)
 
@@ -66,10 +65,11 @@ getkey() {
 				true #Aucune action
 			else
 				position=$(($position-$taillemat))
+				source find_cell.sh
+				find_coord $position
 			fi
 
 		elif [ "$input" ==  "s" ]; then
-			echo "en bas"
 			#Faire action aller en bas si possible (si on est pas déjà sur la derniere ligne)
 
 			if verifypos $array4 $position; then
@@ -80,7 +80,6 @@ getkey() {
 
 
 		elif [ "$input" == "q" ]; then
-			echo "à gauche"
 
 			if verifypos $array2 $position; then
                                 true #Aucune action
@@ -90,7 +89,6 @@ getkey() {
 
 
 		elif [ "$input" == "d" ]; then
-			echo "à droite"
 			
 			if verifypos $array3 $position; then
                                 true #Aucune action 
@@ -100,7 +98,6 @@ getkey() {
 
 
 		elif [ "$input" == "e" ]; then
-			echo "découvre la touche"
 		
 			#appel de la fonction qui change la valeur affiché par le tableau d'affichage 
 			
@@ -111,7 +108,6 @@ getkey() {
 			echo "$position"		
 			exit
 		elif [ "$input" == "a" ]; then
-			echo "poser un flag"
 
 		 	#action pour poser le flag 
 		 	
