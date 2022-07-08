@@ -53,11 +53,21 @@ function difficulte(){
 	fi
 }
 
-function retry(){
-	echo 'recommencer'
+function GameOver(){
+	if  [ $jeu -eq '-1' ]
+		echo '1 - Recommencer'
+		echo '2 - Menu Principal'
+		echo '3 - Quitter'
+		read -p 'Veuillez choisir: ' choix
+	if [ $choix -eq '1' ]
+		jeu
+	if [ $choix -eq '2' ]
+		choisir_menu
+	if [ $choix -eq '3' ]
+		exit
 }
 
-sendDifficulty(){ 
+sendDifficulty(){
 	echo "$taille" "$bombe"
 }
 taille=8
