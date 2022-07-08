@@ -1,6 +1,20 @@
-emplacement = 0
+#!/bin/bash
+
+emplacement=0
 #On fait commencer le joueur à la case 1, donc indice 0.
 # Il faut absolument donner un argument à la fonction getkey, il faut lui passer l'emplacement actul et elle retournera l emplacement de sortie
+
+
+verifypos() {
+
+	for $valeur in $1
+	do
+		if [ $valeur == $2 ]; then
+			return 0
+		fi
+	done
+	return 1
+}
 
 
 
@@ -14,19 +28,77 @@ getkey() {
 
 	
 
+	# Si on veut une taille différente il va falloir mettre à jour le code pour renseigner taillemat
+	taillemat=8
+
+	declare -A array1
+	declare -A array2
+	declare -A array3
+	declare -A array4
+
+	for i in $(seq 0 $(($taillemat-1)))
+	do
+		array1[$i]=$i
+		array2[$i]=$((8*$i))
+		array4[$i]=$((56+$i))
+		array3[$i]=$((7+$((8*$i))))
+	done
+	
+	echo ${array1[*]}
+	
+	echo ${array4[*]}
+
+	if [ -z $1 ]; then
+		echo "Error code 00  | Veuillez passer un argument à getkey"
+	else
+		position=$1
+	fi
+
 	while true; do
 		read -n1 -s input
 
-		if [ "$input" ==  "z" ]; then 
+		if [ "$input" ==  "z" ]; then
 			echo "en haut"
+
 			#Faire action aller en haut si possible (si on est pas déjà sur la premiere ligne)
+
+			if verifypos $array1 $position; then
+				true #Aucune action
+			else
+				position=$(($position-$taillemat))
+			fi
+
 		elif [ "$input" ==  "s" ]; then
 			echo "en bas"
 			#Faire action aller en bas si possible (si on est pas déjà sur la derniere ligne)
+
+			if verifypos $array4 $position; then
+                                true #Aucune action
+                        else
+                                position=$(($position+$taillemat))
+                        fi
+
+
 		elif [ "$input" == "q" ]; then
 			echo "à gauche"
+
+			if verifypos $array2 $position; then
+                                true #Aucune action
+                        else
+                                position=$(($position-1))
+                        fi
+
+
 		elif [ "$input" == "d" ]; then
 			echo "à droite"
+			
+			if verifypos $array3 $position; then
+                                true #Aucune action 
+                        else
+                                position=$(($position+1))
+                        fi
+
+
 		elif [ "$input" == "e" ]; then
 			echo "découvre la touche"
 		
@@ -42,12 +114,14 @@ getkey() {
 			echo "$position"
 			exit
 		else
-			getkey
+			getkey $position
 		fi
+		echo $position
 	done
 }
 
 
+getkey $emplacement
 
 
 
