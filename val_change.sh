@@ -14,11 +14,12 @@ val_change() {
 		exit
 	else
 		local posval=$1
-		grid_af[$posval]=${grid[$posval]}
 		if [ ${grid[$posval]} -eq -1 ]; then
+			grid_af[$posval]="¤"
 			echo "Vous avez trouvé une mine ! jeu perdu"
 			exit
 		else
+			grid_af[$posval]=${grid[$posval]}
 			counter=$(($counter+1))
 			local max=$(($taille_grille-$nb_mine))
 		fi
