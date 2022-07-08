@@ -105,7 +105,7 @@ getkey() {
 			#appel de la fonction qui change la valeur affiché par le tableau d'affichage 
 			
 			source val_change.sh
-			val_change			
+			val_change $position			
 			
 	
 			echo "$position"		
