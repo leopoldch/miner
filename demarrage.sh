@@ -57,14 +57,15 @@ function difficulte(){
 }
 
 function GameOver(){
-	if  [ $fin -eq '1' ]
+	if  [ $fin -eq '1' ]; then
 		echo '2 - Menu Principal'
 		echo '3 - Quitter'
-		read -p 'Veuillez choisir: ' choix
-	if [ $choix -eq '2' ]
+		read -p 'Veuillez choisir : ' choix
+	elif [ $choix -eq '2' ]; then
 		choisir_menu
-	if [ $choix -eq '3' ]
-		exit
+	elif [ $choix -eq '3' ]; then
+	exit
+	fi
 }
 
 sendDifficulty(){
