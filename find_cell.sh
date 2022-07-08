@@ -3,7 +3,7 @@
 find_number(){
 	local x="$1"
 	local y="$2"
-	local len_grid="${#grid[@]}"
+	local len_grid="${#grid_r[@]}"
 	local float_sq_len=$(bc -l <<<"sqrt($len_grid)")
 	local sq_len=$(echo $float_sq_len | cut -d. -f1)
 	local res=$(($x + $y * $sq_len ))
@@ -12,7 +12,7 @@ find_number(){
 
 find_coord(){
 	local loc=$1
-	local len_grid=${#grid[@]}
+	local len_grid=${#grid_r[@]}
 	local float_sq_len=$(bc -l <<<"sqrt($len_grid)")
 	local sq_len=$(echo $float_sq_len | cut -d. -f1)
 	local x=$(($loc%$sq_len))
@@ -21,7 +21,7 @@ find_coord(){
 }
 
 find_neig(){
-	local len_grid=${#grid[@]}
+	local len_grid=${#grid_r[@]}
 	local float_sq_len=$(bc -l <<<"sqrt($len_grid)")
 	local sq_len=$(echo $float_sq_len | cut -d. -f1)
 	local index=$1
