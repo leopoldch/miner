@@ -102,7 +102,11 @@ getkey() {
 		elif [ "$input" == "e" ]; then
 			echo "découvre la touche"
 		
-			#action pour découvrir la case en question
+			#appel de la fonction qui change la valeur affiché par le tableau d'affichage 
+			
+			source val_change.sh
+			val_change			
+			
 	
 			echo "$position"		
 			exit
@@ -110,6 +114,11 @@ getkey() {
 			echo "poser un flag"
 
 		 	#action pour poser le flag 
+		 	
+		 	#appel de la fonction jalon pour poser le flag / modifier le tableau affiché
+		 	
+		 	source jalons.sh
+		 	jalon $position
 
 			echo "$position"
 			exit
