@@ -2,7 +2,17 @@ emplacement = 0
 #On fait commencer le joueur à la case 1, donc indice 0.
 # Il faut absolument donner un argument à la fonction getkey, il faut lui passer l'emplacement actul et elle retournera l emplacement de sortie
 
+
+
 getkey() {
+	
+	if [ $1 -z ]; then
+		echo "erreur 00, veuillez passer un argument à getkey()"
+	else
+		local position=$1
+	fi
+
+	
 
 	while true; do
 		read -n1 -s input
@@ -19,11 +29,17 @@ getkey() {
 			echo "à droite"
 		elif [ "$input" == "e" ]; then
 			echo "découvre la touche"
+		
 			#action pour découvrir la case en question
+	
+			echo "$position"		
 			exit
 		elif [ "$input" == "a" ]; then
 			echo "poser un flag"
+
 		 	#action pour poser le flag 
+
+			echo "$position"
 			exit
 		else
 			getkey
