@@ -1,4 +1,4 @@
-#!/bin/bash
+#/bin/bash
 
 function choisir_menu(){
 	echo '1 - Jouer'
@@ -22,6 +22,11 @@ function choisir_menu(){
 
 function jouer(){
 	echo 'Jouer'
+	start=$(date +%s)
+	# Do something
+	end=$(date +%s)
+	seconds=$(echo "$end - $start" | bc)
+	echo "$seconds" ' sec'
 }
 
 function defi(){
@@ -45,15 +50,14 @@ function difficulte(){
 	then
 		taille=25
 		bombe=40
+	fi
 }
 
 function retry(){
 	echo 'recommencer'
 }
 
-
-sendDifficulty(){
-	if 
+sendDifficulty(){ 
 	echo "$taille" "$bombe"
 }
 taille=8
