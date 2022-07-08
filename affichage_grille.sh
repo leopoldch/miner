@@ -21,7 +21,7 @@ affichageGrille() {
 
 }
 
-affichageGrille "$1" 'grille.txt' # 4 = taille n de la grille
+affichageGrille "$1" 'grille_af.txt' # 4 = taille n de la grille
 echo
 echo
 echo "${array[*]}"
