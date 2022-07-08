@@ -1,4 +1,6 @@
 #/bin/bash
+source affichage_grille.sh
+
 
 function choisir_menu(){
 	echo '1 - Jouer'
@@ -27,6 +29,7 @@ function jouer(){
 	end=$(date +%s)
 	seconds=$(echo "$end - $start" | bc)
 	echo "$seconds" ' sec'
+	affichage_grille
 }
 
 function defi(){
@@ -54,13 +57,10 @@ function difficulte(){
 }
 
 function GameOver(){
-	if  [ $jeu -eq '-1' ]
-		echo '1 - Recommencer'
+	if  [ $fin -eq '1' ]
 		echo '2 - Menu Principal'
 		echo '3 - Quitter'
 		read -p 'Veuillez choisir: ' choix
-	if [ $choix -eq '1' ]
-		jeu
 	if [ $choix -eq '2' ]
 		choisir_menu
 	if [ $choix -eq '3' ]
@@ -73,5 +73,4 @@ sendDifficulty(){
 taille=8
 bombe=20
 
-choisir_menu
 

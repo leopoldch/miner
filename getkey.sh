@@ -1,21 +1,8 @@
 #!/bin/bash
 source find_cell.sh
-emplacement=0
-taille_grille=8
+
 #On fait commencer le joueur à la case 1, donc indice 0.
 # Il faut absolument donner un argument à la fonction getkey, il faut lui passer l'emplacement actul et elle retournera l emplacement de sortie
-
-
-
-#=======================================================
-#Génération d'une grille pour tests
-
-declare -a grid
-	for i in $(seq 0 63)
-	do
-		grid[$i]=$i
-	done
-#=====================================================
 
 
 
@@ -24,7 +11,7 @@ getkey() {
 	if [ -z $1 ]; then
 		echo "erreur 00, veuillez passer un argument à getkey()"
 	else
-		local position=$1
+		 position=$1
 	fi
 
 	
@@ -132,7 +119,6 @@ getkey() {
 }
 
 
-getkey $emplacement
 
 
 
