@@ -2,7 +2,7 @@
 
 
 #Modification de la case du tableau affichage, le tableau que l'utilisateur verra 
-
+#Attention !! Par convention le tableau qui est affiché est appellé grid_af
 
 jalon() {
 
@@ -14,7 +14,7 @@ jalon() {
 	
 	#Tableau affichage / nom à modifier pour agir sur une variable globale
 	
-	tableau_affichage[$position]="¤"
+	grid_af[$position]="¤"
 	
 }
 
