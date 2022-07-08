@@ -1,27 +1,27 @@
 #!/bin/bash
-
+source find_cell.sh
 emplacement=0
-taillemat=8
+taille_grille=8
 #On fait commencer le joueur à la case 1, donc indice 0.
 # Il faut absolument donner un argument à la fonction getkey, il faut lui passer l'emplacement actul et elle retournera l emplacement de sortie
 
 
-verifypos() {
 
-	for $valeur in $1
+#=======================================================
+#Génération d'une grille pour tests
+
+declare -a grid
+	for i in $(seq 0 63)
 	do
-		if [ $valeur == $2 ]; then
-			return 0
-		fi
+		grid[$i]=$i
 	done
-	return 1
-}
+#=====================================================
 
 
 
 getkey() {
 	
-	if [ $1 -z ]; then
+	if [ -z $1 ]; then
 		echo "erreur 00, veuillez passer un argument à getkey()"
 	else
 		local position=$1
@@ -30,70 +30,77 @@ getkey() {
 	
 
 	# Si on veut une taille différente il va falloir mettre à jour le code pour renseigner taillemat
-
-	declare -A array1
-	declare -A array2
-	declare -A array3
-	declare -A array4
-
-	for i in $(seq 0 $(($taillemat-1)))
-	do
-		array1[$i]=$i
-		array2[$i]=$(($taillemat*$i))
-		array4[$i]=$(($(($taillemat*$(($taillemat-1))))+$i))
-		array3[$i]=$(($(($taillemat-1))+$(($taillemat*$i))))
-	done
 	
-	echo ${array1[*]}
-	
-	echo ${array4[*]}
-
 	if [ -z $1 ]; then
 		echo "Error code 00  | Veuillez passer un argument à getkey"
 	else
 		position=$1
 	fi
-
+	
 	while true; do
 		read -n1 -s input
+		
 
 		if [ "$input" ==  "z" ]; then
 
 			#Faire action aller en haut si possible (si on est pas déjà sur la premiere ligne)
+			
+			xhaut=$(find_coord $position | cut -d' ' -f2)
+			echo $xhaut
 
-			if verifypos $array1 $position; then
-				true #Aucune action
+			if [ $xhaut -eq 0 ]; then
+				clear
+                                find_coord $position
 			else
-				position=$(($position-$taillemat))
-				source find_cell.sh
-				find_coord $position
+				clear
+				
+				position=$(($position-$taille_grille))
+				find_coord $position 
 			fi
 
 		elif [ "$input" ==  "s" ]; then
 			#Faire action aller en bas si possible (si on est pas déjà sur la derniere ligne)
+			
+			xbas=$(find_coord $position | cut -d' ' -f2)
+			echo $xbas
 
-			if verifypos $array4 $position; then
-                                true #Aucune action
+			if [ $xbas -eq 7 ]; then
+                                clear
+                                find_coord $position
                         else
-                                position=$(($position+$taillemat))
+                        	clear
+                                position=$(($position+$taille_grille))
+				find_coord $position
                         fi
 
 
 		elif [ "$input" == "q" ]; then
 
-			if verifypos $array2 $position; then
-                                true #Aucune action
+			yright=$(find_coord $position | cut -d' ' -f1)
+			echo $yright
+
+			if [ $yright -eq 0 ]; then
+                                clear
+                                find_coord $position
                         else
+                        	clear
                                 position=$(($position-1))
+				find_coord $position
                         fi
 
 
 		elif [ "$input" == "d" ]; then
 			
-			if verifypos $array3 $position; then
-                                true #Aucune action 
+			yleft=$(find_coord $position | cut -d' ' -f1)
+			echo $yleft
+
+			if [ $yleft -eq 7 ]; then
+                                clear
+                                find_coord $position 
                         else
+                        	clear
                                 position=$(($position+1))
+				find_coord $position
                         fi
 
 
@@ -101,11 +108,12 @@ getkey() {
 		
 			#appel de la fonction qui change la valeur affiché par le tableau d'affichage 
 			
+			
+			
 			source val_change.sh
 			val_change $position			
 			
-	
-			echo "$position"		
+			
 			exit
 		elif [ "$input" == "a" ]; then
 
@@ -116,12 +124,10 @@ getkey() {
 		 	source jalons.sh
 		 	jalon $position
 
-			echo "$position"
 			exit
 		else
 			getkey $position
 		fi
-		echo $position
 	done
 }
 
