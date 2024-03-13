@@ -1,5 +1,5 @@
-# Démineur
+# Miner Game in bash
 
-Description du projet :
+This game is outdated and needs to be fixed. 
 
-Coder un démineur (trouver les cases d'un champ de saisie où il n'y a pas de mines présentes)
+
